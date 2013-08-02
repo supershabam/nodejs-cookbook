@@ -10,4 +10,4 @@
 
 # Author
 
-Author:: Ian Hansen (<ian@supershabam.com>)
+Author:: Ian Hansen (<ian supershabam com>)
