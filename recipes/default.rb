@@ -23,3 +23,28 @@
 # OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 # WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 #
+
+package "nodejs"
+
+remote_file "/tmp/node-v0.10.15-linux-x64.tar.gz" do
+	source "http://nodejs.org/dist/v0.10.15/node-v0.10.15-linux-x64.tar.gz"
+	checksum "d236ed82967eefa726ec144301728b6a32ab8d8d"
+end
+
+bash "install_nodejs" do
+	user "root"
+	cwd "/tmp"
+	code <<-EOH
+		tar -zxf node-v0.10.15-linux-x64.tar.gz
+		rm -fr /usr/local/src/node-v0.10.15-linux-x64
+		mv node-v0.10.15-linux-x64 /usr/local/src/
+	EOH
+end
+
+link "/usr/local/bin/node" do
+	to "/usr/local/src/node-v0.10.15-linux-x64/bin/node"
+end
+
+link "/usr/local/bin/npm" do
+	to "/usr/local/src/node-v0.10.15-linux-x64/bin/npm"
+end
