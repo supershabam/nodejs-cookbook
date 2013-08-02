@@ -26,27 +26,31 @@
 
 package "nodejs"
 
-nodejs_filename = "node-#{node[:nodejs][:version]}-linux-#{node[:nodejs][:architecture]}"
+name = "node-v#{node[:nodejs][:version]}-linux-#{node[:nodejs][:architecture]}"
+is_done = File.executable?("#{node[:nodejs][:install_to]}/node") && `#{node[:nodejs][:install_to]}/node --version`.chomp == "v#{node[:nodejs][:version]}"
 
-remote_file "/tmp/#{nodejs_filename}.tar.gz" do
-	source "http://nodejs.org/dist/#{node[:nodejs][:version]}/#{nodejs_filename}.tar.gz"
+remote_file "#{node[:nodejs][:dest]}/#{name}.tar.gz" do
+	source "http://nodejs.org/dist/v#{node[:nodejs][:version]}/#{name}.tar.gz"
 	checksum node[:nodejs][:checksum]
+  not_if { is_done }
 end
 
-bash "install_nodejs" do
+bash "install" do
 	user "root"
-	cwd "/tmp"
+	cwd node[:nodejs][:dest]
 	code <<-EOH
-		tar -zxf #{nodejs_filename}.tar.gz
-		rm -fr /usr/local/src/#{nodejs_filename}
-		mv #{nodejs_filename} /usr/local/src/
+    rm -fr #{name}
+		tar -xf #{name}.tar.gz
 	EOH
+  not_if { is_done }
 end
 
-link "/usr/local/bin/node" do
-	to "/usr/local/src/#{nodejs_filename}/bin/node"
+link "#{node[:nodejs][:install_to]}/node" do
+  to "#{node[:nodejs][:dest]}/#{name}/bin/node"
+  not_if { is_done }
 end
 
-link "/usr/local/bin/npm" do
-	to "/usr/local/src/#{nodejs_filename}/bin/npm"
+link "#{node[:nodejs][:install_to]}/npm" do
+  to "#{node[:nodejs][:dest]}/#{name}/bin/npm"
+  not_if { is_done }
 end
