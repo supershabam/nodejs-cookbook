@@ -1,13 +1,19 @@
 # nodejs-cookbook cookbook
 
-# Requirements
+installs nodejs from nodejs.org provided binaries
 
-# Usage
+## Platform
 
-# Attributes
+Writen with intent to support Ubuntu 12.04 LTS, but should work with most linuxy things.
 
-# Recipes
+## Attributes
 
-# Author
+* `architecture` target architecture "x64" or "x86"
+* `checksum` provided on [npmjs.org](http://nodejs.org/dist/v0.10.15/SHASUMS.txt)
+* `dest` where to download tarball and extract source (kept on-disk for your pleasure)
+* `install_to` where to place the `node` and `npm` binaries
+* `version` version to ensure is installed and used in url for downloading tarball
 
-Author:: Ian Hansen (<ian supershabam com>)
+## LICENSE
+
+MIT
