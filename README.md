@@ -1,6 +1,6 @@
-# nodejs-cookbook cookbook
+# nodejs-cookbook
 
-installs nodejs from nodejs.org provided binaries
+Installs nodejs from [nodejs.org](http://nodejs.org) provided binaries
 
 ## Platform
 
@@ -8,7 +8,7 @@ Writen with intent to support Ubuntu 12.04 LTS, but should work with most linuxy
 
 ## Attributes
 
-* `architecture` target architecture "x64" or "x86"
+* `architecture` target architecture `x64` or `x86`
 * `checksum` provided on [npmjs.org](http://nodejs.org/dist/v0.10.15/SHASUMS.txt)
 * `dest` where to download tarball and extract source (kept on-disk for your pleasure)
 * `install_to` where to place the `node` and `npm` binaries
