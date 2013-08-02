@@ -30,18 +30,18 @@ name = "node-v#{node[:nodejs][:version]}-linux-#{node[:nodejs][:architecture]}"
 is_done = File.executable?("#{node[:nodejs][:install_to]}/node") && `#{node[:nodejs][:install_to]}/node --version`.chomp == "v#{node[:nodejs][:version]}"
 
 remote_file "#{node[:nodejs][:dest]}/#{name}.tar.gz" do
-	source "http://nodejs.org/dist/v#{node[:nodejs][:version]}/#{name}.tar.gz"
-	checksum node[:nodejs][:checksum]
+  source "http://nodejs.org/dist/v#{node[:nodejs][:version]}/#{name}.tar.gz"
+  checksum node[:nodejs][:checksum]
   not_if { is_done }
 end
 
 bash "install" do
-	user "root"
-	cwd node[:nodejs][:dest]
-	code <<-EOH
+  user "root"
+  cwd node[:nodejs][:dest]
+  code <<-EOH
     rm -fr #{name}
-		tar -xf #{name}.tar.gz
-	EOH
+    tar -xf #{name}.tar.gz
+  EOH
   not_if { is_done }
 end
 
