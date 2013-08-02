@@ -4,7 +4,7 @@ Installs nodejs from [nodejs.org](http://nodejs.org) provided binaries
 
 ## Platform
 
-Writen with intent to support Ubuntu 12.04 LTS, but should work with most linuxy things.
+Written with intent to support Ubuntu 12.04 LTS, but should work with most linuxy things.
 
 ## Attributes
 
