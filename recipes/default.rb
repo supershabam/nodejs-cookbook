@@ -26,25 +26,27 @@
 
 package "nodejs"
 
-remote_file "/tmp/node-v0.10.15-linux-x64.tar.gz" do
-	source "http://nodejs.org/dist/v0.10.15/node-v0.10.15-linux-x64.tar.gz"
-	checksum "d236ed82967eefa726ec144301728b6a32ab8d8d"
+nodejs_filename = "node-#{node[:nodejs][:version]}-linux-#{node[:nodejs][:architecture]}"
+
+remote_file "/tmp/#{nodejs_filename}.tar.gz" do
+	source "http://nodejs.org/dist/#{node[:nodejs][:version]}/#{nodejs_filename}.tar.gz"
+	checksum node[:nodejs][:checksum]
 end
 
 bash "install_nodejs" do
 	user "root"
 	cwd "/tmp"
 	code <<-EOH
-		tar -zxf node-v0.10.15-linux-x64.tar.gz
-		rm -fr /usr/local/src/node-v0.10.15-linux-x64
-		mv node-v0.10.15-linux-x64 /usr/local/src/
+		tar -zxf #{nodejs_filename}.tar.gz
+		rm -fr /usr/local/src/#{nodejs_filename}
+		mv #{nodejs_filename} /usr/local/src/
 	EOH
 end
 
 link "/usr/local/bin/node" do
-	to "/usr/local/src/node-v0.10.15-linux-x64/bin/node"
+	to "/usr/local/src/#{nodejs_filename}/bin/node"
 end
 
 link "/usr/local/bin/npm" do
-	to "/usr/local/src/node-v0.10.15-linux-x64/bin/npm"
+	to "/usr/local/src/#{nodejs_filename}/bin/npm"
 end
