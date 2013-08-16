@@ -1,5 +1,5 @@
 default[:nodejs][:architecture] = "x64"
-default[:nodejs][:checksum]     = "d236ed82967eefa726ec144301728b6a32ab8d8d"
+default[:nodejs][:checksum]     = "784ac3b09eedc9ea2eda6d9bc8f7dd9760f40002"
 default[:nodejs][:dest]         = "/usr/local/src"
 default[:nodejs][:install_to]   = "/usr/local/bin"
-default[:nodejs][:version]      = "0.10.15"
+default[:nodejs][:version]      = "0.10.16"
